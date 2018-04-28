@@ -7,6 +7,8 @@ a good fit for that.
 **Do not use this in production**, unless you like data loss, kernel crashes and you don't
 mind if your house burns down.
 
+If you're interested in a more serious implementation, have a look at https://github.com/spullara/nbd.
+
 ## Installation
 
  * Install [FoundationDB](https://apple.github.io/foundationdb/local-dev.html).
