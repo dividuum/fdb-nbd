@@ -26,6 +26,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
 
+from __future__ import print_function
+
 import struct
 import logging
 import signal
@@ -240,12 +242,12 @@ class FDBStore(object):
         return self._size
 
     def seek(self, pos):
-        # print 'seek', pos
+        # print('seek', pos)
         self._pos = pos
         assert pos % self._block_size == 0, "misaligned seek"
 
     def write(self, data):
-        # print 'write', len(data)
+        # print('write', len(data))
         assert len(data) % self._block_size == 0, "misaligned write"
 
         @fdb.transactional
@@ -256,7 +258,7 @@ class FDBStore(object):
         transactional_write(self._db)
 
     def read(self, length):
-        # print 'read', length
+        # print('read', length)
         assert length % self._block_size == 0, "misaligned read"
         start = self._pos / self._block_size
         end = (self._pos + length) / self._block_size
@@ -314,7 +316,7 @@ def main():
     stores.create('example', 1000000)
 
     for name in stores.list():
-        print 'store %s\n  nbd-client -N %s 127.0.0.1 /dev/nbd0' % (name, name)
+        print('store %s\n  nbd-client -N %s 127.0.0.1 /dev/nbd0' % (name, name))
 
     server = Server(('127.0.0.1', 10809), stores)
     gevent.signal(signal.SIGTERM, server.stop)
